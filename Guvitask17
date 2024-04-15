@@ -1,0 +1,44 @@
+package base;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import java.time.Duration;
+
+
+public class Guvitask17 {
+
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://www.snapdeal.com");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WebElement signInButton =  driver.findElement(By.xpath("//div[contains(@class,'accountInner')]"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(signInButton).build().perform();
+
+
+
+        driver.findElement(By.xpath("//div[contains(@class,'accountInner')]")).click();
+        driver.findElement(By.xpath("//span[contains(@class,'accountBtn')]")).click();
+
+        driver.switchTo().frame(driver.findElement(By.xpath("//*[@id = 'loginIframe']")));
+        driver.findElement(By.xpath("//input[@type = 'text' and @id = 'userName']")).sendKeys("naveenrajv129@gmail.com");
+
+
+
+        driver.findElement(By.xpath("//button[@id = 'checkUser']")).click();
+
+        driver.wait();
+
+        driver.findElement(By.xpath("//button[@id ='loginUsingOtp']")).click();
+        String title = driver.getCurrentUrl();
+        System.out.println(title);
+
+
+        }
+
+}
